@@ -12,12 +12,22 @@ const axiosClient = axios.create({
 
 const getLatestProducts = () => axiosClient.get("/products?populate=*");
 
-const getProductsById = (id) => axiosClient.get("/products/"+id+"?populate=*");
+const getProductsById = (id) =>
+  axiosClient.get("/products/" + id + "?populate=*");
 
-const getProductListByCategory = (category) => axiosClient.get("/products?filters[category][$eq]="+category+"&populate=*");
+const getProductListByCategory = (category) =>
+  axiosClient.get(
+    "/products?filters[category][$eq]=" + category + "&populate=*"
+  );
+
+const addToCart = (data) => axiosClient.post("/carts", data);
+
+const getUserCartItems = (email) => axiosClient.get('/carts?populate[products][populate][0]=banner&filters[email][$eq]='+email)
 
 export default {
   getLatestProducts,
   getProductsById,
-  getProductListByCategory
+  getProductListByCategory,
+  addToCart,
+  getUserCartItems
 };

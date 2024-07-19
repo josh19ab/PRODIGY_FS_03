@@ -1,10 +1,11 @@
 import { IndianRupee, SquareChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function ProductItem({ product }) {
   return (
-    <div>
+    <Link href={'/product-details/'+product.id}>
       <div className="hover:drop-shadow-[0_10px_20px_rgba(0,0,0,0.25)] transition-all duration-300 ease-in-out p-1 rounded-lg ">
         <Image
           src={product?.attributes?.banner?.data.attributes?.url}
@@ -31,7 +32,7 @@ function ProductItem({ product }) {
           </h2>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

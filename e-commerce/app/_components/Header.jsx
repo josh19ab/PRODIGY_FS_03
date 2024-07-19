@@ -1,8 +1,52 @@
+'use client'
+import { SignedOut, SignIn } from "@clerk/clerk-react";
+import { UserButton, useUser } from "@clerk/nextjs";
+import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { CartContext } from "../_context/CartContext";
+import GlobalApi from "../_utils/GlobalApi";
+import Cart from "./Cart";
 
 function Header() {
-  return (
+
+  const { user } = useUser();
+
+  const [isLogin, setIsLogin] = useState();
+
+  const {cart, setCart} = useContext(CartContext);
+
+  const [openCart,setOpenCart] = useState(false);
+
+  useEffect(() => {
+    setIsLogin(window.location.href.toString().includes('sign-in'));
+    // setIsLogin(window.location.href.toString().includes('sign-up'));
+  },[]);
+
+  useEffect(() => {
+    user&&getCartItem();
+  },[user])
+
+  useEffect(() => {
+    openCart==false&&setOpenCart(true);
+  },[cart])
+
+  const getCartItem= () =>{
+    GlobalApi.getUserCartItems(user.primaryEmailAddress.emailAddress).then(resp => {
+      const result = resp.data.data
+
+      result&&result.forEach(prd => {
+        setCart(cart => [...cart,
+          {
+            id:prd.id,
+            product:prd.attributes.products.data[0]
+          }
+        ])
+      })
+    })
+  }
+
+  return !isLogin &&(
     <header className="bg-white">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between shadow-sm">
@@ -16,7 +60,7 @@ function Header() {
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+                    href="/"
                   >
                     {" "}
                     Home{" "}
@@ -66,22 +110,36 @@ function Header() {
             </nav>
 
             <div className="flex items-center gap-4">
-              <div className="sm:flex sm:gap-4">
-                <a
-                  className="block rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-800 hover:text"
-                  href="#"
-                >
-                  Login
-                </a>
-                <div className="hidden sm:flex">
+              {!user ? (
+                <div className="sm:flex sm:gap-4">
                   <a
-                    className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-primary transition hover:text-blue-800/75 sm:block"
-                    href="#"
+                    className="block rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-800 hover:text cursor-pointer"
+                    href={"/sign-in"}
                   >
-                    Register
+                    Login
                   </a>
+                  <div className="hidden sm:flex">
+                    <a
+                      className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-primary transition hover:text-blue-800/75 sm:block"
+                      href={"/sign-up"}
+                    >
+                      Register
+                    </a>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="flex gap-3 items-center">
+                  <h2 className="flex gap-1 items-center cursor-pointer"
+                  onClick={()=> setOpenCart(!openCart)}
+                  >
+                    <ShoppingCart />
+                    ({cart?.length})
+                  </h2>
+                  <UserButton />
+                </div>
+              )}
+
+              {openCart&&<Cart />}
 
               <div className="block md:hidden">
                 <button className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
@@ -106,6 +164,7 @@ function Header() {
         </div>
       </div>
     </header>
+    
   );
 }
 

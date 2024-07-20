@@ -1,17 +1,17 @@
+'use client';
 import { AlertOctagon, BadgeCheck, IndianRupee } from "lucide-react";
 import { FaCartPlus } from "react-icons/fa6";
 import React, { useContext } from "react";
 import SkeletalProjectInfo from "./SkeletalProjectInfo";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import GlobalApi from "@/app/_utils/GlobalApi";
-import { CartContext } from "@/app/_context/CartContext";
+import { CartContext } from "../../../_context/CartContext";
+import GlobalApi from "../../../_utils/GlobalApi";
 
-function ProjectInfo({ product }) {
+function ProjectInfo({ product, toggleCart }) { 
   const { user } = useUser();
   const router = useRouter();
-
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, setCart,  openCart } = useContext(CartContext);
 
   const addToCartClick = () => {
     if (!user) {
@@ -35,6 +35,7 @@ function ProjectInfo({ product }) {
                 product: product,
               },
             ]);
+            toggleCart(); // Call toggleCart to open the cart
           }
         },
         (error) => console.log(error)

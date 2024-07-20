@@ -1,48 +1,72 @@
 "use client";
 
-import Breadcrumb from "@/app/_components/Breadcrumb";
-import GlobalApi from "@/app/_utils/GlobalApi";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProjectBanner from "./_components/ProjectBanner";
 import ProjectInfo from "./_components/ProjectInfo";
-import ProductList from "@/app/_components/ProductList";
 import { usePathname } from "next/navigation";
+import GlobalApi from "../../_utils/GlobalApi";
+import ProductList from "../../_components/ProductList";
+import { CartContext } from "../../_context/CartContext";
+import Breadcrumb from "../../_components/Breadcrumb";
+import SkeletalProductList from "../../_components/SkeletalProductsList";
 
 function ProductDetails({ params }) {
-
+  const [isLoading, setIsLoading] = useState(true);
   const [productDetail, setProductDetails] = useState();
   const [productList, setProductList] = useState([]);
   const path = usePathname();
+  const { toggleCart } = useContext(CartContext);
 
   useEffect(() => {
-    params?.productId && getProductById();
+    if (params?.productId) {
+      getProductById();
+    }
   }, [params?.productId]);
 
-  const getProductById = () => {
-    GlobalApi.getProductsById(params?.productId).then((resp) => {
+  const getProductById = async () => {
+    try {
+      const resp = await GlobalApi.getProductsById(params?.productId);
       setProductDetails(resp.data.data);
       getProductListByCategory(resp.data.data);
-    });
+    } catch (error) {
+      console.error("Error fetching product by ID:", error);
+    }
   };
 
-  const getProductListByCategory = (product) => {
-    GlobalApi.getProductListByCategory(
-      product?.attributes?.category
-    ).then(resp => {
+  const getProductListByCategory = async (product) => {
+    try {
+      const resp = await GlobalApi.getProductListByCategory(
+        product?.attributes?.category
+      );
       setProductList(resp.data.data);
-    });
+    } catch (error) {
+      console.error("Error fetching product list by category:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
-    <div className="p-5 py-12 px-10 md:px-28">
+    <div className="p-5 py-12 px-10 md:px-28 ">
       <Breadcrumb path={path} />
       <div className="grid grid-cols-1 sm:grid-cols-2 mt-10 gap-5 sm:gap-10">
         <ProjectBanner product={productDetail} />
-        <ProjectInfo product={productDetail} />
+        <ProjectInfo product={productDetail} toggleCart={toggleCart} />
       </div>
-      {productList&& <div className="mt-20">
-        <h2 className="font-medium text-[20px] mb-4">Similar Products</h2>
-        <ProductList productList={productList} />
-      </div>}
+      <div>
+        <h2 className="mt-20 font-medium text-[20px] mb-4">Similar Products</h2>
+        {isLoading ? (
+          <SkeletalProductList />
+        ) : (
+          <div>
+            {productList.length > 0 && (
+              <div className="">
+                <ProductList productList={productList} />
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

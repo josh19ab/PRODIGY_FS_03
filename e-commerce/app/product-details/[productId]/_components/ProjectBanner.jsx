@@ -3,7 +3,7 @@ import React from "react";
 
 function ProjectBanner({ product }) {
   return (
-    <div className="flex  items-center justify-around">
+    <div className=" flex  items-center justify-around">
       {product ? (
         <Image
           src={product?.attributes?.banner?.data.attributes?.url}

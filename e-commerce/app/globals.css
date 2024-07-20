@@ -2,19 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Default color variables */
 :root {
   --foreground-rgb: 0, 0, 0;
-  
-  }
+  --background-start-rgb: 255, 255, 255; /* Light background */
+  --background-end-rgb: 255, 255, 255; /* Light background */
+}
 
+/* Dark mode preferences */
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 255, 255, 255; /* Light text for dark mode */
+    --background-start-rgb: 27, 38, 44; /* Dark background start (#1B262C) */
+    --background-end-rgb: 27, 38, 44; /* Dark background end (#1B262C) */
   }
 }
 
+/* Body styles */
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -25,8 +29,52 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Dark Mode Styles */
+body.dark {
+  background-color: rgb(27, 38, 44); /* Dark background (#1B262C) */
+  color: rgb(255, 255, 255); /* Light text color */
 }
+
+body.dark .bg-gray-50 {
+  background-color: rgb(27, 38, 44); 
+}
+
+body.dark #itemBody {
+  background-color: #3282B8; 
+}
+
+
+body.dark .text-gray-900 {
+  color: rgb(255, 255, 255); /* Light text color */
+}
+
+body.dark .text-gray-700 {
+  color: rgb(187, 225, 250); /* Light text color for paragraphs (#BBE1FA) */
+}
+
+body.dark .bg-primary {
+  background-color: rgb(50, 130, 184); /* Dark button background (#3282B8) */
+}
+
+header, footer {
+  background-color: #f8f8f8; /* Light background */
+  color: #000; /* Dark text */
+}
+
+body.dark header{
+  background-color: rgb(27, 38, 44); /* Dark header/footer background (#1B262C) */
+  color: rgb(255, 255, 255); /* Light text */
+}
+
+body.dark footer {
+  background-color: rgb(27, 38, 44); /* Dark header/footer background (#1B262C) */
+  color: rgb(255, 255, 255); /* Light text */
+}
+
+body.dark #breadcrumb {
+  color: rgb(255, 255, 255); /* Light text */
+}
+
+
+
+/* Add any additional dark mode styles as needed */

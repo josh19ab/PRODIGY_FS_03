@@ -14,7 +14,7 @@ function ProductItem({ product }) {
           height={350}
           className="rounded-t-lg h-[170px] object-cover"
         />
-        <div className="flex justify-between items-center bg-gray-50 p-3 rounded-b-lg max-w-[400px]">
+        <div className="flex justify-between items-center bg-gray-50  p-3 rounded-b-lg max-w-[400px]" id="itemBody">
           <div className="">
             <h2 className="text-[14px] font-medium">
               {product.attributes.title}

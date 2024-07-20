@@ -1,69 +1,88 @@
-'use client'
-import { SignedOut, SignIn } from "@clerk/clerk-react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
-import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../_context/CartContext";
+import DarkMode from "./DarkMode";
 import GlobalApi from "../_utils/GlobalApi";
 import Cart from "./Cart";
 
 function Header() {
-
   const { user } = useUser();
-
   const [isLogin, setIsLogin] = useState();
-
-  const {cart, setCart} = useContext(CartContext);
-
-  const [openCart,setOpenCart] = useState(false);
+  const { cart, openCart, toggleCart, setCart } = useContext(CartContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    setIsLogin(window.location.href.toString().includes('sign-in'));
-    // setIsLogin(window.location.href.toString().includes('sign-up'));
-  },[]);
+    setIsLogin(window.location.href.includes("sign-in"));
+  }, []);
 
   useEffect(() => {
-    user&&getCartItem();
-  },[user])
+    setIsLogin(window.location.href.includes("sign-up"));
+  }, []);
 
   useEffect(() => {
-    openCart==false&&setOpenCart(true);
-  },[cart])
+    if (user) {
+      getCartItem();
+    }
+  }, [user]);
 
-  const getCartItem= () =>{
-    GlobalApi.getUserCartItems(user.primaryEmailAddress.emailAddress).then(resp => {
-      const result = resp.data.data
+  const getCartItem = async () => {
+    try {
+      const resp = await GlobalApi.getUserCartItems(
+        user.primaryEmailAddress.emailAddress
+      );
+      const result = resp.data.data;
 
-      result&&result.forEach(prd => {
-        setCart(cart => [...cart,
-          {
-            id:prd.id,
-            product:prd.attributes.products.data[0]
-          }
-        ])
-      })
-    })
-  }
+      if (result) {
+        const newCartItems = result.map((prd) => ({
+          id: prd.id,
+          product: prd.attributes.products.data[0],
+        }));
+        setCart(newCartItems);
+      }
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
+  };
 
-  return !isLogin &&(
-    <header className="bg-white">
+  const toggleMenu = () => {
+    setIsMenuOpen((prevState) => !prevState);
+  };
+
+  return (
+    <header className="bg-white dark:bg-gray-800">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between shadow-sm">
+        <div className="flex h-16 items-center justify-between shadow-sm text-gray-900 dark:text-light">
           <div className="flex-1 md:flex md:items-center md:gap-12">
             <Image src="/logo.svg" alt="logo" width={90} height={100} />
           </div>
 
           <div className="md:flex md:items-center md:gap-12">
-            <nav aria-label="Global" className="hidden md:block">
-              <ul className="flex items-center gap-6 text-sm">
+            <nav
+              aria-label="Global"
+              className={`absolute right-3 z-10 bg-white md:text-light md:bg-inherit dark:bg-darkBg  shadow-md md:static md:block md:p-0 md:shadow-none px-10 py-10  md:mt-0 mt-10 rounded-md ${
+                isMenuOpen
+                  ? "animate-slide-in-right block"
+                  : "animate-slide-out-right hidden"
+              }`}
+            >
+              <ul className="flex flex-col items-start gap-4 text-md md:flex-row md:items-center md:gap-6 dark:text-dark">
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
                     href="/"
                   >
-                    {" "}
-                    Home{" "}
+                    Home
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    className="text-gray-500 transition hover:text-gray-500/75"
+                    href="/explore"
+                  >
+                    Explore
                   </a>
                 </li>
 
@@ -72,8 +91,7 @@ function Header() {
                     className="text-gray-500 transition hover:text-gray-500/75"
                     href="#"
                   >
-                    {" "}
-                    Explore{" "}
+                    Projects
                   </a>
                 </li>
 
@@ -82,8 +100,7 @@ function Header() {
                     className="text-gray-500 transition hover:text-gray-500/75"
                     href="#"
                   >
-                    {" "}
-                    Projects{" "}
+                    About Us
                   </a>
                 </li>
 
@@ -92,57 +109,46 @@ function Header() {
                     className="text-gray-500 transition hover:text-gray-500/75"
                     href="#"
                   >
-                    {" "}
-                    About Us{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Contact{" "}
+                    Contact
                   </a>
                 </li>
               </ul>
             </nav>
 
             <div className="flex items-center gap-4">
+              <DarkMode />
               {!user ? (
                 <div className="sm:flex sm:gap-4">
                   <a
-                    className="block rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-800 hover:text cursor-pointer"
-                    href={"/sign-in"}
+                    className="block rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white transition hover:bg-darkAccent"
+                    href="/sign-in"
                   >
                     Login
                   </a>
-                  <div className="hidden sm:flex">
-                    <a
-                      className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-primary transition hover:text-blue-800/75 sm:block"
-                      href={"/sign-up"}
-                    >
-                      Register
-                    </a>
-                  </div>
+                  <a
+                    className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-primary transition hover:text-darkAccent sm:block"
+                    href="/sign-up"
+                  >
+                    Register
+                  </a>
                 </div>
               ) : (
                 <div className="flex gap-3 items-center">
-                  <h2 className="flex gap-1 items-center cursor-pointer"
-                  onClick={()=> setOpenCart(!openCart)}
+                  <h2
+                    className="flex gap-1 items-center cursor-pointer"
+                    onClick={toggleCart}
                   >
-                    <ShoppingCart />
-                    ({cart?.length})
+                    <ShoppingCart />({cart ? cart.length : 0})
                   </h2>
                   <UserButton />
                 </div>
               )}
-
-              {openCart&&<Cart />}
-
+              {openCart && <Cart />}
               <div className="block md:hidden">
-                <button className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
+                <button
+                  className="rounded bg-gray-100 dark:bg-gray-700 p-2 text-gray-600 dark:text-gray-300 transition hover:text-gray-600/75 dark:hover:text-gray-200"
+                  onClick={toggleMenu}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -151,21 +157,28 @@ function Header() {
                     stroke="currentColor"
                     strokeWidth="2"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  </svg>
-                </button>
+                    {isMenuOpen ? (
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    ) : (
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"
+                        />
+                      )}
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </header>
-    
-  );
-}
+      </header>
+    );
+  }
 
-export default Header;
+  export default Header;

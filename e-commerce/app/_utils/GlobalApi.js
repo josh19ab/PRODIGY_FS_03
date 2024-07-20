@@ -31,6 +31,14 @@ const deleteCartItem = (id) => axiosClient.delete("/carts/" + id);
 
 const createOrder = (data) => axiosClient.post("/orders", data);
 
+const addComment = (data) => axiosClient.post("/comments", data);
+
+const getCommentById = (id) => axiosClient.get(`/comments?filters[products][id][$eq]=${id}&populate=*`);
+
+const getUserOrders = (email) => axiosClient.get(`/orders?filters[email][$eq]=${email}&populate=*`);
+
+
+
 export default {
   getLatestProducts,
   getProductsById,
@@ -39,4 +47,7 @@ export default {
   getUserCartItems,
   deleteCartItem,
   createOrder,
+  addComment,
+  getCommentById,
+  getUserOrders
 };

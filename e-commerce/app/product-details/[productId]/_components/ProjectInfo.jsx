@@ -72,7 +72,7 @@ function ProjectInfo({ product, toggleCart }) {
             {product?.attributes?.pricing}
           </h2>
           <button
-            className="flex gap-2 p-3 items-center bg-primary text-white rounded-lg px-10 mt-5 hover:bg-blue-700"
+            className="flex gap-2 p-3 items-center bg-darkAccent text-white rounded-lg px-10 mt-5 hover:bg-darkPrimary"
             onClick={addToCartClick}
           >
             <FaCartPlus />

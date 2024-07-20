@@ -19,18 +19,12 @@ function Hero() {
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a
-              className="block w-full rounded bg-darkPrimary px-12 py-3 text-sm font-medium text-white shadow   sm:w-auto hover:bg-white focus:outline-none focus:ring hover:text-darkBg"
+              className="block w-full rounded bg-darkPrimary px-12 py-3 text-sm font-medium text-white shadow   sm:w-auto hover:bg-darkAccent focus:outline-none focus:ring "
               href="#"
             >
-              Get Started
+              Buy Now
             </a>
 
-            <a
-              className="block w-full rounded px-12 py-3 text-sm font-medium text-darkPrimary shadow hover:text-gray-400   focus:outline-none focus:ring sm:w-auto dark:bg-darkPrimary"
-              href="#"
-            >
-              Learn More
-            </a>
           </div>
         </div>
       </div>

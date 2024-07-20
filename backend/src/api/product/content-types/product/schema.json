@@ -63,7 +63,13 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::order.order",
-      "inversedBy": "products"
+      "mappedBy": "products"
+    },
+    "comments": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::comment.comment",
+      "mappedBy": "products"
     }
   }
 }

@@ -8,7 +8,7 @@ function Cart() {
   const { user } = useUser();
 
   return user && (
-    <div className="h-[300px] w-[250px] bg-white dark:bg-darkBg z-10 rounded-md absolute mx-5 sm:mx-10 md:mx-15 lg:mx-30 xl:mx-40 right-10 top-12 p-5 border border-gray-300 dark:border-gray-600 shadow-sm overflow-auto">
+    <div className="h-[300px] w-[250px] bg-gray-100 dark:bg-darkBg z-10 rounded-md absolute mx-5 sm:mx-10 md:mx-15 lg:mx-30 xl:mx-40 right-10 top-12 p-5 border border-gray-300  shadow-md overflow-auto">
       <div className="mt-4 space-y-6">
         <ul className="space-y-4">
           {cart.map((item, index) => (
@@ -22,7 +22,7 @@ function Cart() {
                 <h3 className="text-sm text-gray-900 dark:text-white line-clamp-1">
                   {item?.product?.attributes?.title}
                 </h3>
-                <dl className="mt-0.5 space-y-px text-[10px] text-gray-600 dark:text-gray-300">
+                <dl className="mt-0.5 space-y-px text-[10px] text-gray-500 dark:text-gray-300">
                   <div>
                     <dt className="inline">
                       {item?.product?.attributes?.category}
@@ -43,7 +43,7 @@ function Cart() {
       <div className="space-y-4 text-center mt-5">
         <a
           href="/cart"
-          className="block rounded bg-gray-700 dark:bg-gray-600 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600 dark:hover:bg-gray-500"
+          className="block rounded bg-gray-700 dark:bg-light px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600 dark:hover:bg-gray-500"
         >
           View my cart ({cart?.length})
         </a>

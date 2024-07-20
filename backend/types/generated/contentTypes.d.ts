@@ -817,6 +817,45 @@ export interface ApiCartCart extends Schema.CollectionType {
   };
 }
 
+export interface ApiCommentComment extends Schema.CollectionType {
+  collectionName: 'comments';
+  info: {
+    singularName: 'comment';
+    pluralName: 'comments';
+    displayName: 'Comment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    userName: Attribute.String;
+    email: Attribute.Email;
+    desc: Attribute.Text;
+    products: Attribute.Relation<
+      'api::comment.comment',
+      'manyToMany',
+      'api::product.product'
+    >;
+    rating: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::comment.comment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::comment.comment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiOrderOrder extends Schema.CollectionType {
   collectionName: 'orders';
   info: {
@@ -837,6 +876,8 @@ export interface ApiOrderOrder extends Schema.CollectionType {
       'manyToMany',
       'api::product.product'
     >;
+    orderID: Attribute.UID;
+    status: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -882,6 +923,11 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'manyToMany',
       'api::order.order'
     >;
+    comments: Attribute.Relation<
+      'api::product.product',
+      'manyToMany',
+      'api::comment.comment'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -919,6 +965,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::cart.cart': ApiCartCart;
+      'api::comment.comment': ApiCommentComment;
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
     }

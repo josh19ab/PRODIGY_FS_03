@@ -9,12 +9,7 @@ export async function POST(req) {
 
   try {
     const { email, userName, products, amount } = body; // Destructure the necessary fields
-
-    // Log the input values for debugging
-    console.log("Email:", email);
-    console.log("User Name:", userName);
-    console.log("Total Amount:", amount);
-
+    
     // Ensure EmailTemplate returns a valid HTML string
     const emailContent = EmailTemplate({
       firstName: userName, // Assuming userName is passed as firstName

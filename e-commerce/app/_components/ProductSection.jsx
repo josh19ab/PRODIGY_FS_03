@@ -47,10 +47,10 @@ function ProductSection() {
           <h2 className="font-bold my-3 text-[20px] text-gray-900 dark:text-white">
             New Arrivals
           </h2>
-          <div className="flex cursor-pointer">
+          <a className="flex cursor-pointer" href="/explore">
             <h2 className="text-[14px] text-primary dark:text-blue-300">See Collection</h2>
             <ArrowRight className="text-primary dark:text-blue-300 w-4 h-4" />
-          </div>
+          </a>
         </div>
         <div>
           {isLoading ? (
@@ -65,10 +65,10 @@ function ProductSection() {
           <h2 className="font-bold my-3 text-[20px] text-gray-900 dark:text-white">
             Sneakers
           </h2>
-          <div className="flex cursor-pointer">
+          <a className="flex cursor-pointer" href="/explore">
             <h2 className="text-[14px] text-primary dark:text-blue-300">See Collection</h2>
             <ArrowRight className="text-primary dark:text-blue-300 w-4 h-4" />
-          </div>
+          </a>
         </div>
         <div>
           {isLoading ? (
@@ -83,10 +83,10 @@ function ProductSection() {
           <h2 className="font-bold my-3 text-[20px] text-gray-900 dark:text-white">
             Outfits
           </h2>
-          <div className="flex cursor-pointer">
+          <a className="flex cursor-pointer" href="/explore">
             <h2 className="text-[14px] text-primary dark:text-blue-300">See Collection</h2>
             <ArrowRight className="text-primary dark:text-blue-300 w-4 h-4" />
-          </div>
+          </a>
         </div>
         <div>
           {isLoading ? (

@@ -193,25 +193,27 @@ function explore() {
 
         <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 dark:bg-dark">
           <div className="hidden space-y-4 lg:block">
-            <div>
+            <div className="py-2 dark:bg-dark">
               <label
-                htmlFor="SortBy"
-                className="block text-xs font-medium text-gray-700"
+                htmlFor="HeadlineAct"
+                className="block text-sm font-medium text-gray-900 "
               >
                 {" "}
                 Sort By{" "}
               </label>
 
               <select
-                id="SortBy"
-                className="mt-1 rounded border-gray-300 text-sm"
+                name="HeadlineAct"
+                id="HeadlineAct"
+                className="mt-1.5 w-[170px] rounded-md border-gray-300 text-gray-800 sm:text-sm p-2"
                 onChange={handleSortChange}
               >
-                <option>Sort By</option>
-                <option value="titleDESC">z - a</option>
+                <option value="">Select</option>
                 <option value="titleASC">a - z</option>
+                <option value="titleDESC">z - a</option>
                 <option value="priceASC">low to high</option>
                 <option value="priceDESC">high to low</option>
+                
               </select>
             </div>
 
@@ -318,7 +320,7 @@ function explore() {
                         onClick={() => {
                           setMinPrice("");
                           setMaxPrice("");
-                          setFilteredList(productList); 
+                          setFilteredList(productList);
                         }}
                       >
                         Reset
@@ -331,7 +333,9 @@ function explore() {
                           htmlFor="FilterPriceFrom"
                           className="flex items-center gap-2"
                         >
-                          <span className="text-sm text-gray-600"><IndianRupee className="w-4 h-4"/></span>
+                          <span className="text-sm text-gray-600">
+                            <IndianRupee className="w-4 h-4" />
+                          </span>
                           <input
                             type="number"
                             id="FilterPriceFrom"
@@ -346,7 +350,9 @@ function explore() {
                           htmlFor="FilterPriceTo"
                           className="flex items-center gap-2"
                         >
-                          <span className="text-sm text-gray-600"><IndianRupee className="w-4 h-4" /></span>
+                          <span className="text-sm text-gray-600">
+                            <IndianRupee className="w-4 h-4" />
+                          </span>
                           <input
                             type="number"
                             id="FilterPriceTo"

@@ -9,6 +9,8 @@ import ProductList from "../../_components/ProductList";
 import { CartContext } from "../../_context/CartContext";
 import Breadcrumb from "../../_components/Breadcrumb";
 import SkeletalProductList from "../../_components/SkeletalProductsList";
+import CommentBox from "./_components/CommentBox";
+import CommentList from "./_components/CommentsList";
 
 function ProductDetails({ params }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +18,13 @@ function ProductDetails({ params }) {
   const [productList, setProductList] = useState([]);
   const path = usePathname();
   const { toggleCart } = useContext(CartContext);
+  const productId = path.split("/")[2];
+  const [shouldRefresh, setShouldRefresh] = useState(false);
+  
+
+  const handleRefresh = () => {
+    setShouldRefresh(!shouldRefresh);
+  };
 
   useEffect(() => {
     if (params?.productId) {
@@ -47,13 +56,13 @@ function ProductDetails({ params }) {
   };
 
   return (
-    <div className="p-5 py-12 px-10 md:px-28 ">
+    <div className="p-5 py-12 px-10 md:px-28  dark:bg-dark ">
       <Breadcrumb path={path} />
       <div className="grid grid-cols-1 sm:grid-cols-2 mt-10 gap-5 sm:gap-10">
         <ProjectBanner product={productDetail} />
         <ProjectInfo product={productDetail} toggleCart={toggleCart} />
       </div>
-      <div>
+      <div >
         <h2 className="mt-20 font-medium text-[20px] mb-4">Similar Products</h2>
         {isLoading ? (
           <SkeletalProductList />
@@ -66,6 +75,12 @@ function ProductDetails({ params }) {
             )}
           </div>
         )}
+      </div>
+      <div className="mt-20">
+        <CommentList productId={productId} onRefresh={shouldRefresh}/>
+      </div>
+      <div className="flex justify-around">
+        <CommentBox onRefresh={handleRefresh} productId={productId} />
       </div>
     </div>
   );

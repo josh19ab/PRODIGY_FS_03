@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "orders",
+  "collectionName": "comments",
   "info": {
-    "singularName": "order",
-    "pluralName": "orders",
-    "displayName": "Order",
+    "singularName": "comment",
+    "pluralName": "comments",
+    "displayName": "Comment",
     "description": ""
   },
   "options": {
@@ -12,26 +12,23 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "email": {
-      "type": "email"
-    },
     "userName": {
       "type": "string"
     },
-    "amount": {
-      "type": "decimal"
+    "email": {
+      "type": "email"
+    },
+    "desc": {
+      "type": "text"
     },
     "products": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::product.product",
-      "inversedBy": "orders"
+      "inversedBy": "comments"
     },
-    "orderID": {
-      "type": "uid"
-    },
-    "status": {
-      "type": "boolean"
+    "rating": {
+      "type": "integer"
     }
   }
 }

@@ -12,14 +12,14 @@
 /* Dark mode preferences */
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255; /* Light text for dark mode */
-    --background-start-rgb: 27, 38, 44; /* Dark background start (#1B262C) */
-    --background-end-rgb: 27, 38, 44; /* Dark background end (#1B262C) */
+    --foreground-rgb: 255, 255, 255; 
+    --background-start-rgb: 27, 38, 44; 
+    --background-end-rgb: 27, 38, 44; 
   }
 }
 
 /* Body styles */
-body {
+/* body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -27,7 +27,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-}
+} */
 
 /* Dark Mode Styles */
 body.dark {
@@ -38,18 +38,36 @@ body.dark {
 body.dark .bg-gray-50 {
   background-color: rgb(27, 38, 44); 
 }
+body.dark .bg-gray-100 {
+  background-color:#2b6b95; 
+}
+
+body.dark .bg-gray-700 {
+  background-color:rgb(255, 255, 255);
+}
+
 
 body.dark #itemBody {
   background-color: #3282B8; 
 }
 
+body.dark .text-gray-100 {
+  color:  rgb(27, 38, 44); /* Light text color */
+}
+body.dark .text-gray-700 {
+  color:  rgb(27, 38, 44); /* Light text color */
+}
 
 body.dark .text-gray-900 {
   color: rgb(255, 255, 255); /* Light text color */
 }
 
 body.dark .text-gray-700 {
-  color: rgb(187, 225, 250); /* Light text color for paragraphs (#BBE1FA) */
+  color: rgb(255, 255, 255);/* Light text color for paragraphs (#BBE1FA) */
+}
+
+body.dark .text-dark {
+  color: rgb(255, 255, 255);/* Light text color for paragraphs (#BBE1FA) */
 }
 
 body.dark .bg-primary {
@@ -75,6 +93,11 @@ body.dark #breadcrumb {
   color: rgb(255, 255, 255); /* Light text */
 }
 
+
+body.dark .text-gray-500{
+  color: rgb(255, 255, 255);
+} 
+  
 
 
 /* Add any additional dark mode styles as needed */

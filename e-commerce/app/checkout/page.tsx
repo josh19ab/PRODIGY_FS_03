@@ -1,22 +1,21 @@
-"use client";
-
 import React from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./_components/CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
-// import { useSearchParams } from "next/navigation";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY);
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY as string);
 
-function Checkout({ amount }) {
-  // const searchParams = useSearchParams();
+type CheckoutProps = {
+  amount: number;
+};
 
+const Checkout: React.FC<CheckoutProps> = ({ amount }) => {
   if (!amount || isNaN(amount) || amount <= 0) {
     return <div className="text-red-500">Invalid amount specified.</div>;
   }
 
   const options = {
-    mode: "payment",
+    mode: "payment" as const,
     currency: "usd",
     amount: amount * 100,
   };
@@ -26,6 +25,6 @@ function Checkout({ amount }) {
       <CheckoutForm amount={amount} />
     </Elements>
   );
-}
+};
 
 export default Checkout;

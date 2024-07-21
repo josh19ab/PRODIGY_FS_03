@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "checkJs": false,
     "skipLibCheck": true,
@@ -13,7 +18,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "forceConsistentCasingInFileNames": true,
     "plugins": [
+      {
+        "name": "typescript"
+      },
       {
         "name": "next"
       }
@@ -25,8 +34,9 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
-    "**/*.jsx",
-    "app/api/create-intent/route.jsx"
-, "app/_components/Breadcrumb.jsx"  ],
-  "exclude": ["node_modules"]
+    "**/*.jsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

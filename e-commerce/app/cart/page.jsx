@@ -18,13 +18,14 @@ function Cart() {
   const router = useRouter();
   useEffect(() => {
     if (user) {
-      getCartItem(); 
+      getCartItem();
     }
   }, [user]);
 
   const getTotalAmount = () => {
     return cart.reduce((total, item) => {
-      return total + Number(item.product.attributes.pricing);
+      const pricing = parseFloat(item.product.attributes.pricing);
+      return total + (isNaN(pricing) ? 0 : pricing); // Handle NaN cases
     }, 0);
   };
 
@@ -37,6 +38,7 @@ function Cart() {
   if (isCheckout) {
     return <Checkout amount={totalAmount} />;
   }
+
 
   const deleteCartItem_ = (id) => {
     GlobalApi.deleteCartItem(id).then(

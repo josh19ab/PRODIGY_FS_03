@@ -8,7 +8,9 @@ function orders() {
         <div className="text-dark dark:text-darkText font-bold text-[24px] flex justify-around ">
           <h2>Your Orders</h2>
         </div>
-        <OrderTracking />
+        <div >
+          <OrderTracking />
+        </div>
       </div>
     </section>
   );

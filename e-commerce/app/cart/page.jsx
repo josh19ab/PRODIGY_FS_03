@@ -7,25 +7,36 @@ import GlobalApi from "../_utils/GlobalApi";
 import { useUser } from "@clerk/nextjs";
 import SkeletalCart from "./_components/SkeletalCart";
 import { useRouter } from "next/navigation";
+import Checkout from "../checkout/page";
 
 function Cart() {
   const { user } = useUser();
   const { cart, setCart } = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [isCheckout, setIsCheckout] = useState(false);
   const router = useRouter();
   useEffect(() => {
     if (user) {
-      getCartItem(); // Fetch cart items when the user is available
+      getCartItem(); 
     }
   }, [user]);
 
   const getTotalAmount = () => {
-    let totalAmount = 0;
-    cart.forEach((element) => {
-      totalAmount += Number(element.product.attributes.pricing);
-    });
-    return totalAmount;
+    return cart.reduce((total, item) => {
+      return total + Number(item.product.attributes.pricing);
+    }, 0);
   };
+
+  const handleCheckout = () => {
+    const amount = getTotalAmount();
+    setTotalAmount(amount);
+    setIsCheckout(true);
+  };
+
+  if (isCheckout) {
+    return <Checkout amount={totalAmount} />;
+  }
 
   const deleteCartItem_ = (id) => {
     GlobalApi.deleteCartItem(id).then(
@@ -144,7 +155,7 @@ function Cart() {
                       <dt>Total:</dt>
                       <dd className="flex items-center font-medium ">
                         <IndianRupee className="w-4 h-4" />
-                        {cart&&getTotalAmount()}
+                        {cart && getTotalAmount()}
                       </dd>
                     </div>
                   </dl>
@@ -152,20 +163,20 @@ function Cart() {
                   <div className="flex justify-end">
                     <button
                       className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
-                      onClick={() => router.push('/checkout?amount='+getTotalAmount())}
+                      onClick={handleCheckout}
                     >
                       Checkout
                     </button>
                   </div>
                 </div>
               </div>
+              <h2 className="text-gray-400 text-[14px] text-center mt-10">
+                Note: The order invoice will be sent to the registered email.
+              </h2>
             </div>
           )}
         </div>
       </div>
-      <h2 className="text-gray-400 text-[14px] text-center mt-5">
-        Note: The order invoice will be sent to the registered email.
-      </h2>
     </section>
   );
 }

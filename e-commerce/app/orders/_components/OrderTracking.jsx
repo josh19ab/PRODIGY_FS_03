@@ -55,44 +55,56 @@ const OrderTracking = () => {
           {orders.length === 0 ? (
             <p>No orders found.</p>
           ) : (
-            <div className="flex justify-center ">
-              <div className="overflow-x-auto mt-10  ">
-                <table className="min-w-full divide-y-2 divide-gray-200 bg-gray-50 text-sm">
+            <div className="mt-10">
+              <div className="overflow-hidden rounded-lg shadow">
+                <table className="w-full divide-y-2 divide-gray-200 bg-gray-50 text-sm">
                   <thead className="ltr:text-left rtl:text-right">
                     <tr>
-                      <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                      <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left w-1/4">
                         Order ID
                       </th>
-                      <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                      <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left w-1/4">
                         Date
                       </th>
-                      <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                      <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left w-1/4">
                         No. of products
                       </th>
-                      <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                      <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left w-1/4">
                         Amount
                       </th>
-                      <th className="px-4 py-2"></th>
+                      <th className="px-2 py-2"></th>
                     </tr>
                   </thead>
 
                   <tbody className="divide-y divide-gray-200">
                     {orders.map((order) => (
                       <tr key={order.id}>
-                        <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                        <td
+                          className="whitespace-nowrap px-2 py-2 font-medium text-gray-900"
+                          data-label="Order ID"
+                        >
                           {order.id}
                         </td>
-                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                        <td
+                          className="whitespace-nowrap px-2 py-2 text-gray-700"
+                          data-label="Date"
+                        >
                           {order.attributes.createdAt.slice(0, 10)}
                         </td>
-                        <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
+                        <td
+                          className="whitespace-nowrap px-2 py-2 text-gray-700 "
+                          data-label="No. of products"
+                        >
                           {order.attributes.products.data.length}
                         </td>
-                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                        <td
+                          className="whitespace-nowrap px-2 py-2 text-gray-700"
+                          data-label="Amount"
+                        >
                           <IndianRupee className="w-3 h-3 inline" />
                           {order.attributes.amount}
                         </td>
-                        <td className="whitespace-nowrap px-4 py-2">
+                        <td className="whitespace-nowrap px-2 py-2">
                           <button
                             className="inline-block rounded bg-darkAccent px-4 py-2 text-xs font-medium text-white hover:bg-darkPrimary"
                             onClick={() => handleViewOrder(order)}
@@ -115,5 +127,4 @@ const OrderTracking = () => {
     </>
   );
 };
-
 export default OrderTracking;

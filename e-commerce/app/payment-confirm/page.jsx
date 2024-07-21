@@ -2,8 +2,8 @@ import React from 'react';
 
 function PaymentConfirm() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full text-center transform transition-transform duration-500 hover:scale-105">
+    <div className="flex items-center justify-center mt-20 bg-gray-50">
+      <div className=" shadow-lg rounded-lg p-8 max-w-md w-full text-center transform transition-transform duration-500 hover:scale-105 bg-white">
         <div className="mb-6">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -6,8 +6,7 @@ import { CartContext } from "../_context/CartContext";
 import DarkMode from "./DarkMode";
 import GlobalApi from "../_utils/GlobalApi";
 import Cart from "./Cart";
-import { usePathname } from 'next/navigation';
-
+import { usePathname } from "next/navigation";
 
 function Header() {
   const { user } = useUser();
@@ -16,8 +15,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const path = usePathname();
 
-
-  const hideHeader = path === '/sign-in' || path === '/sign-up';
+  const hideHeader = path === "/sign-in" || path === "/sign-up";
 
   useEffect(() => {
     if (user) {
@@ -50,118 +48,122 @@ function Header() {
 
   if (hideHeader) return null;
 
-  return(
+  return (
     <div>
-    <header className="bg-white dark:bg-gray-800" id="header">
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between shadow-sm text-gray-900 dark:text-light">
-          <div className="flex-1 md:flex md:items-center md:gap-12">
-            <Image src="/logo.svg" alt="logo" width={60} height={40} id="logo"/>
-          </div>
+      <header className="bg-white dark:bg-gray-800" id="header">
+        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between shadow-sm text-gray-900 dark:text-light">
+            <div className="flex-1 md:flex md:items-center md:gap-12">
+              <Image
+                src="/logo.svg"
+                alt="logo"
+                width={60}
+                height={40}
+                id="logo"
+              />
+            </div>
 
-          <div className="md:flex md:items-center md:gap-12">
-            <nav
-              aria-label="Global"
-              className={`absolute right-3 z-10 bg-gray-50 border border-darkText md:border-none
+            <div className="md:flex md:items-center md:gap-12">
+              <nav
+                aria-label="Global"
+                className={`absolute right-3 z-10 bg-gray-50 border border-darkText md:border-none
                   md:text-light  dark:bg-darkBg  shadow-md md:static md:block md:p-0 md:shadow-none px-10 py-10  md:mt-0 mt-10 rounded-md ${
-                isMenuOpen
-                  ? "animate-slide-in-right block"
-                  : "animate-slide-out-right hidden"
-              }`}
-            >
-              <ul className="flex flex-col items-start gap-4 text-[12px] md:flex-row md:items-center md:gap-6 dark:text-dark">
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="/"
-                  >
-                    Home
-                  </a>
-                </li>
+                    isMenuOpen
+                      ? "animate-slide-in-right block"
+                      : "animate-slide-out-right hidden"
+                  }`}
+              >
+                <ul className="flex flex-col items-start gap-4 text-[12px] md:flex-row md:items-center md:gap-6 dark:text-dark">
+                  <li>
+                    <a
+                      className="text-gray-500 transition hover:text-gray-500/75"
+                      href="/"
+                    >
+                      Home
+                    </a>
+                  </li>
 
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="/explore"
-                  >
-                    Explore
-                  </a>
-                </li>
+                  <li>
+                    <a
+                      className="text-gray-500 transition hover:text-gray-500/75"
+                      href="/explore"
+                    >
+                      Explore
+                    </a>
+                  </li>
 
+                  <li>
+                    <a
+                      className="text-gray-500 transition hover:text-gray-500/75"
+                      href="/cart"
+                    >
+                      Cart
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="text-gray-500 transition hover:text-gray-500/75"
+                      href="/orders"
+                    >
+                      Orders
+                    </a>
+                  </li>
+                </ul>
+              </nav>
 
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="/orders"
+              <div className="flex items-center gap-4">
+                <DarkMode />
+                {!user ? (
+                  <div className="sm:flex sm:gap-4">
+                    <a
+                      className="block rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white transition hover:bg-darkAccent"
+                      href="/sign-in"
+                    >
+                      Login
+                    </a>
+                    <a
+                      className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-primary transition hover:text-darkAccent sm:block"
+                      href="/sign-up"
+                    >
+                      Register
+                    </a>
+                  </div>
+                ) : (
+                  <div className="flex gap-3 items-center">
+                    <h2
+                      className="flex gap-1 items-center cursor-pointer"
+                      onClick={toggleCart}
+                    >
+                      <ShoppingCart />({cart ? cart.length : 0})
+                    </h2>
+                    <UserButton />
+                  </div>
+                )}
+                {openCart && <Cart />}
+                <div className="block md:hidden">
+                  <button
+                    className="rounded bg-gray-100 dark:bg-gray-700 p-2 text-gray-600 dark:text-gray-300 transition hover:text-gray-600/75 dark:hover:text-gray-200"
+                    onClick={toggleMenu}
                   >
-                    Orders
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="/cart"
-                  >
-                    Cart
-                  </a>
-                </li>
-              </ul>
-            </nav>
-
-            <div className="flex items-center gap-4">
-              <DarkMode />
-              {!user ? (
-                <div className="sm:flex sm:gap-4">
-                  <a
-                    className="block rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white transition hover:bg-darkAccent"
-                    href="/sign-in"
-                  >
-                    Login
-                  </a>
-                  <a
-                    className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-primary transition hover:text-darkAccent sm:block"
-                    href="/sign-up"
-                  >
-                    Register
-                  </a>
-                </div>
-              ) : (
-                <div className="flex gap-3 items-center">
-                  <h2
-                    className="flex gap-1 items-center cursor-pointer"
-                    onClick={toggleCart}
-                  >
-                    <ShoppingCart />({cart ? cart.length : 0})
-                  </h2>
-                  <UserButton />
-                </div>
-              )}
-              {openCart && <Cart />}
-              <div className="block md:hidden">
-                <button
-                  className="rounded bg-gray-100 dark:bg-gray-700 p-2 text-gray-600 dark:text-gray-300 transition hover:text-gray-600/75 dark:hover:text-gray-200"
-                  onClick={toggleMenu}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    {isMenuOpen ? (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    ) : (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M4 6h16M4 12h16M4 18h16"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      {isMenuOpen ? (
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      ) : (
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M4 6h16M4 12h16M4 18h16"
                         />
                       )}
                     </svg>
@@ -172,8 +174,8 @@ function Header() {
           </div>
         </div>
       </header>
-      </div>
-    );
-  }
+    </div>
+  );
+}
 
-  export default Header;
+export default Header;

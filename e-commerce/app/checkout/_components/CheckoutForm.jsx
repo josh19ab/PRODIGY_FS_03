@@ -1,7 +1,8 @@
+'use client'
 import React, { useContext, useState } from "react";
 import {
   useStripe,
-  useElements,
+  useElements,                          
   PaymentElement,
 } from "@stripe/react-stripe-js";
 import GlobalApi from "../../_utils/GlobalApi";

@@ -18,8 +18,8 @@
   }
 }
 
-/* Body styles */
-/* body {
+Body styles
+body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -27,7 +27,7 @@
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-} */
+}
 
 /* Dark Mode Styles */
 body.dark {
@@ -75,13 +75,13 @@ body.dark .bg-primary {
 }
 
 header, footer {
-  background-color: #f8f8f8; /* Light background */
-  color: #000; /* Dark text */
+  background-color: #f8f8f8; 
+  color: #000; 
 }
 
 body.dark header{
-  background-color: rgb(27, 38, 44); /* Dark header/footer background (#1B262C) */
-  color: rgb(255, 255, 255); /* Light text */
+  background-color: rgb(27, 38, 44); 
+  color: rgb(255, 255, 255);
 }
 
 body.dark footer {
@@ -97,6 +97,8 @@ body.dark #breadcrumb {
 body.dark .text-gray-500{
   color: rgb(255, 255, 255);
 } 
+
+
   
 /* Ensure the table is responsive */
 table {

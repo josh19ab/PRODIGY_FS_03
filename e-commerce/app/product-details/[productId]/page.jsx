@@ -56,7 +56,7 @@ function ProductDetails({ params }) {
   };
 
   return (
-    <div className="p-5 py-12 px-10 md:px-28  dark:bg-dark ">
+    <div className="p-5 py-12 px-10 md:px-28 ">
       <Breadcrumb path={path} />
       <div className="grid grid-cols-1 sm:grid-cols-2 mt-10 gap-5 sm:gap-10">
         <ProjectBanner product={productDetail} />

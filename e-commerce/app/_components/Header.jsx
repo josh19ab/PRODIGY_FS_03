@@ -50,8 +50,8 @@ function Header() {
 
   return (
     <div>
-      <header className="bg-white dark:bg-gray-800" id="header">
-        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+      <header className=" dark:bg-gray-800" id="header">
+        <div className=" bg-gray-50 mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between shadow-sm text-gray-900 dark:text-light">
             <div className="flex-1 md:flex md:items-center md:gap-12">
               <a href="/">
@@ -68,8 +68,8 @@ function Header() {
             <div className="md:flex md:items-center md:gap-12">
               <nav
                 aria-label="Global"
-                className={`absolute right-3 z-10 bg-gray-50 border border-darkText md:border-none
-                  md:text-light  dark:bg-darkBg  shadow-md md:static md:block md:p-0 md:shadow-none px-10 py-10  md:mt-0 mt-10 rounded-md ${
+                className={`absolute right-3 z-10 bg-gray-50 border border-darkAccent md:border-none
+                  md:text-light    shadow-md md:static md:block md:p-0 md:shadow-none px-10 py-10  md:mt-0 mt-12 rounded-md ${
                     isMenuOpen
                       ? "animate-slide-in-right block"
                       : "animate-slide-out-right hidden"
@@ -133,7 +133,7 @@ function Header() {
                 ) : (
                   <div className="flex gap-3 items-center">
                     <h2
-                      className="flex gap-1 items-center cursor-pointer"
+                      className="flex gap-1 items-center cursor-pointer text-gray-900 "
                       onClick={toggleCart}
                     >
                       <ShoppingCart />({cart ? cart.length : 0})
@@ -144,7 +144,7 @@ function Header() {
                 {openCart && <Cart />}
                 <div className="block md:hidden">
                   <button
-                    className="rounded bg-gray-100 dark:bg-gray-700 p-2 text-gray-600 dark:text-gray-300 transition hover:text-gray-600/75 dark:hover:text-gray-200"
+                    className="rounded bg-gray-100 p-2 text-gray-900  transition hover:bg-gray-200 "
                     onClick={toggleMenu}
                   >
                     <svg

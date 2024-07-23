@@ -41,10 +41,10 @@ function ProductSection() {
 
   return (
     productList && (
-      <div className="bg-gray-50 dark:bg-gray-900 px-10 md:px-20">
+      <div className="bg-gray-50 px-10 md:px-20">
         {/* Latest Products */}
         <div className="flex items-center justify-between">
-          <h2 className="font-bold my-3 text-[20px] text-gray-900 dark:text-white">
+          <h2 className="font-bold my-3 text-[20px] text-gray-900 ">
             New Arrivals
           </h2>
           <a className="flex cursor-pointer" href="/explore">
@@ -62,7 +62,7 @@ function ProductSection() {
 
         {/* Sneakers  */}
         <div className="flex items-center justify-between">
-          <h2 className="font-bold my-3 text-[20px] text-gray-900 dark:text-white">
+          <h2 className="font-bold my-3 text-[20px] text-gray-900 ">
             Sneakers
           </h2>
           <a className="flex cursor-pointer" href="/explore">
@@ -80,7 +80,7 @@ function ProductSection() {
 
         {/* Outfits */}
         <div className="flex items-center justify-between">
-          <h2 className="font-bold my-3 text-[20px] text-gray-900 dark:text-white">
+          <h2 className="font-bold my-3 text-[20px] text-gray-900 ">
             Outfits
           </h2>
           <a className="flex cursor-pointer" href="/explore">

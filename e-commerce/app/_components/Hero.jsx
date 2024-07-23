@@ -2,17 +2,17 @@ import React from "react";
 
 function Hero() {
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
+    <section>
       <div className="mx-auto max-w-screen-xl px-4 py-24 lg:flex">
         <div className="mx-auto max-w-xl text-center">
-          <h1 className="text-3xl font-extrabold sm:text-5xl text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-extrabold sm:text-5xl text-gray-900 ">
             E-Commerce website &nbsp;
             <strong className="font-extrabold text-primary sm:block">
               For a local store.
             </strong>
           </h1>
 
-          <p className="mt-4 sm:text-xl text-gray-700 dark:text-gray-300">
+          <p className="mt-4 sm:text-xl text-gray-700">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
             illo tenetur fuga ducimus numquam ea!
           </p>

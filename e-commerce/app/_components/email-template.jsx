@@ -87,7 +87,7 @@ export const EmailTemplate = ({ firstName, email, products, amount }) => {
               display: inline-block;
               background: #000000;
               color: #ecf0f1;
-              padding: 15px;
+              padding: 20px;
               text-decoration: none;
               border-radius: 5px;
               text-align: center;

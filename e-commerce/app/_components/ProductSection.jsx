@@ -41,7 +41,7 @@ function ProductSection() {
 
   return (
     productList && (
-      <div className="bg-gray-50 px-10 md:px-20">
+      <div className="px-10 md:px-20">
         {/* Latest Products */}
         <div className="flex items-center justify-between">
           <h2 className="font-bold my-3 text-[20px] text-gray-900 ">

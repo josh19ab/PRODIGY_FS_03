@@ -52,7 +52,7 @@ function Header() {
     <div>
       <header id="header">
         <div className=" bg-gray-50 mx-auto  px-4 sm:px-6 lg:px-8 p-2">
-          <div className="flex h-16 items-center justify-between shadow-sm text-gray-900 dark:text-light">
+          <div className="flex h-16 items-center justify-between  text-gray-900 dark:text-light">
             <div className="flex-1 md:flex md:items-center md:gap-12">
               <a href="/">
                 <Image

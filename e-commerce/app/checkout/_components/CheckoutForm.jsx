@@ -1,8 +1,8 @@
-'use client'
+"use client";
 import React, { useContext, useState } from "react";
 import {
   useStripe,
-  useElements,                          
+  useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
 import GlobalApi from "../../_utils/GlobalApi";
@@ -84,11 +84,11 @@ function CheckoutForm({ amount }) {
   const sendEmail = async () => {
     // Prepare product details for the email
     const productDetails = cart.map((item) => ({
-      name: item.product.attributes.title, 
+      name: item.product.attributes.title,
       category: item.product.attributes.category,
       price: item.product.attributes.pricing,
-      quantity: 1, 
-      url: item.product.attributes.banner.data.attributes.url
+      quantity: 1,
+      url: item.product.attributes.banner.data.attributes.url,
     }));
 
     const res = await fetch("/api/send-email", {
@@ -109,12 +109,13 @@ function CheckoutForm({ amount }) {
     }
   };
 
-
   return (
     <form onSubmit={handleSubmit}>
-      <div className="px-20 md:mx-[250px] lg:mx-[300px] xl:mx-[400px] mt-12">
-        <PaymentElement />
-        <button className="bg-primary p-2 text-white w-full rounded-md mt-6 hover:bg-blue-700">
+      <div className="px-4 md:px-20 lg:px-40 mt-12 mx-auto max-w-screen-lg">
+        <div className="w-full">
+          <PaymentElement />
+        </div>
+        <button className="bg-darkPrimary p-2 text-white w-full rounded-md mt-6 hover:bg-darkAccent">
           Submit
         </button>
       </div>

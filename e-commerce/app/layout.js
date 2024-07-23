@@ -1,12 +1,13 @@
-'use client';
+"use client";
 
 import { Mukta } from "next/font/google";
 import "./globals.css";
 import Header from "./_components/Header";
 import Footer from "./_components/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
-import { CartContext } from "./_context/CartContext"; // Ensure this is the correct import
+import { CartContext } from "./_context/CartContext"; 
 import { useEffect, useState } from "react";
+import { CheckoutProvider } from "./_context/CheckoutContext";
 
 const mukta = Mukta({ weight: "400", subsets: ["latin"] });
 
@@ -37,19 +38,21 @@ export default function RootLayout({ children }) {
   };
 
   const toggleCart = () => {
-    setOpenCart(prev => !prev); // Toggle cart visibility
+    setOpenCart((prev) => !prev); // Toggle cart visibility
   };
 
   return (
     <ClerkProvider>
       <CartContext.Provider value={{ cart, setCart, openCart, toggleCart }}>
-        <html lang="en">
-          <body className={mukta.className}>
-            <Header toggleDarkMode={toggleDarkMode} />
-            {children}
-            <Footer toggleDarkMode={toggleDarkMode} />
-          </body>
-        </html>
+        <CheckoutProvider>
+          <html lang="en">
+            <body className={mukta.className}>
+              <Header toggleDarkMode={toggleDarkMode} />
+              {children}
+              <Footer toggleDarkMode={toggleDarkMode} />
+            </body>
+          </html>
+        </CheckoutProvider>
       </CartContext.Provider>
     </ClerkProvider>
   );

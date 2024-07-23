@@ -54,13 +54,15 @@ function Header() {
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between shadow-sm text-gray-900 dark:text-light">
             <div className="flex-1 md:flex md:items-center md:gap-12">
-              <Image
-                src="/logo.svg"
-                alt="logo"
-                width={60}
-                height={40}
-                id="logo"
-              />
+              <a href="/">
+                <Image
+                  src="/logo.svg"
+                  alt="logo"
+                  width={60}
+                  height={40}
+                  id="logo"
+                />
+              </a>
             </div>
 
             <div className="md:flex md:items-center md:gap-12">

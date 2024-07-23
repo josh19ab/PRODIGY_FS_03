@@ -8,12 +8,13 @@ import { useUser } from "@clerk/nextjs";
 import SkeletalCart from "./_components/SkeletalCart";
 import { useRouter } from "next/navigation";
 import Checkout from "../checkout/page";
+import { useCheckout } from "../_context/CheckoutContext";
 
 function Cart() {
   const { user } = useUser();
   const { cart, setCart } = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(true); // Loading state
-  const [totalAmount, setTotalAmount] = useState(0);
+  // const [totalAmount, setTotalAmount] = useState(0);
   const [isCheckout, setIsCheckout] = useState(false);
   const router = useRouter();
   useEffect(() => {
@@ -28,17 +29,15 @@ function Cart() {
       return total + (isNaN(pricing) ? 0 : pricing); // Handle NaN cases
     }, 0);
   };
+  
+  const amount = getTotalAmount();
+
+  const { setTotalAmount } = useCheckout();
 
   const handleCheckout = () => {
-    const amount = getTotalAmount();
     setTotalAmount(amount);
-    setIsCheckout(true);
+    router.push("/checkout");
   };
-
-  if (isCheckout) {
-    return <Checkout amount={totalAmount} />;
-  }
-
 
   const deleteCartItem_ = (id) => {
     GlobalApi.deleteCartItem(id).then(

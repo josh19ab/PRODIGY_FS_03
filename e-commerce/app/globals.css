@@ -74,10 +74,7 @@ body.dark .bg-primary {
   background-color: rgb(50, 130, 184); /* Dark button background (#3282B8) */
 }
 
-header, footer {
-  background-color: #f8f8f8; 
-  color: #000; 
-}
+
 
 body.dark header{
   background-color: rgb(27, 38, 44); 

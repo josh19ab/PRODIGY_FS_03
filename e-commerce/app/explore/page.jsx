@@ -17,7 +17,7 @@ function explore() {
   const [outfitList, setOutfitList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sortOption, setSortOption] = useState("titleASC");
-  const [filterCategory, setFilterCategory] = useState("");
+  const [filterCategory, setFilterCategory] = useState("");   
   const [filteredList, setFilteredList] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedAvailability, setSelectedAvailability] = useState([]);
@@ -34,7 +34,6 @@ function explore() {
       const data = resp.data.data;
       setProductList(data);
       setFilteredList(data);
-      // Adding filter for sneakers and outfits
       const sneakers = data.filter(
         (item) => item.attributes.category === "sneakers"
       );
@@ -61,15 +60,12 @@ function explore() {
 
   useEffect(() => {
     let updatedList = [...productList];
-
-    // Apply filtering
     if (filterCategory) {
       updatedList = updatedList.filter(
         (item) => item.attributes.category === filterCategory
       );
     }
 
-    // Apply sorting
     updatedList.sort((a, b) => {
       if (sortOption === "titleASC") {
         return a.attributes.title.localeCompare(b.attributes.title);
@@ -89,16 +85,16 @@ function explore() {
   const handleCategoryChange = (category) => {
     setSelectedCategories((prev) => {
       if (prev.includes(category)) {
-        return prev.filter((cat) => cat !== category); // Remove category if already selected
+        return prev.filter((cat) => cat !== category); 
       } else {
-        return [...prev, category]; // Add category if not selected
+        return [...prev, category]; 
       }
     });
   };
 
   useEffect(() => {
     if (selectedCategories.length === 0) {
-      setFilteredList(productList); // If no category is selected, show all products
+      setFilteredList(productList); 
     } else {
       const updatedList = productList.filter((item) =>
         selectedCategories.includes(item.attributes.category)
@@ -110,9 +106,9 @@ function explore() {
   const handleAvailabilityChange = (availability) => {
     setSelectedAvailability((prev) => {
       if (prev.includes(availability)) {
-        return prev.filter((a) => a !== availability); // Remove availability if already selected
+        return prev.filter((a) => a !== availability); 
       } else {
-        return [...prev, availability]; // Add availability if not selected
+        return [...prev, availability]; 
       }
     });
   };
@@ -120,7 +116,6 @@ function explore() {
   useEffect(() => {
     let updatedList = [...productList];
 
-    // Apply availability filtering
     if (selectedAvailability.length > 0) {
       updatedList = updatedList.filter((item) =>
         selectedAvailability.includes("instantDelivery")
@@ -135,11 +130,9 @@ function explore() {
   const handlePriceFilter = () => {
     let updatedList = [...productList];
 
-    // Convert minPrice and maxPrice to numbers
     const min = parseFloat(minPrice);
     const max = parseFloat(maxPrice);
 
-    // Filter based on price range
     if (!isNaN(min) && !isNaN(max)) {
       updatedList = updatedList.filter((item) => {
         const price = item.attributes.pricing;
@@ -155,7 +148,7 @@ function explore() {
   };
 
   return (
-    <section className=" bg-gray-50 dark:bg-gray-900">
+    <section className=" bg-gray-50">
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <Breadcrumb path={path} />
         <header>
@@ -191,9 +184,9 @@ function explore() {
           </button>
         </div>
 
-        <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8 dark:bg-dark">
+        <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8">
           <div className="hidden space-y-4 lg:block">
-            <div className="py-2 dark:bg-dark">
+            <div className="py-2">
               <label
                 htmlFor="HeadlineAct"
                 className="block text-sm font-medium text-gray-900 "
@@ -311,7 +304,7 @@ function explore() {
                     <header className="flex items-center justify-between p-4">
                       <span className="text-sm text-gray-700">
                         {minPrice && maxPrice
-                          ? `${minPrice} &nbsp - &nbsp ${maxPrice}`
+                          ? `${minPrice}  -  ${maxPrice}`
                           : "0 - 0"}
                       </span>
                       <button

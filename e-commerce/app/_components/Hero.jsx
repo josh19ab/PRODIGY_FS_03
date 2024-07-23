@@ -20,7 +20,7 @@ function Hero() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a
               className="block w-full rounded bg-darkPrimary px-12 py-3 text-sm font-medium text-white shadow   sm:w-auto hover:bg-darkAccent focus:outline-none focus:ring "
-              href="#"
+              href="/explore"
             >
               Buy Now
             </a>

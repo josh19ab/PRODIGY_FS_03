@@ -163,7 +163,7 @@ export const EmailTemplate = ({ firstName, email, products, amount }) => {
           </Section>
           <Section className="footer">
             <Text>Thank You For Shopping From UrbanKicks.</Text>
-            <Button href="https://e-commerce-jo.vercel.app" className="button">
+            <Button href="https://urbankicks.vercel.app" className="button">
               Continue Shopping
             </Button>
             <Text>If you have any questions, feel free to contact us.</Text>

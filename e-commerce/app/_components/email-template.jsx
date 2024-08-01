@@ -85,13 +85,21 @@ export const EmailTemplate = ({ firstName, email, products, amount }) => {
             }
             .button {
               display: inline-block;
-              background: #000000;
-              color: #ecf0f1;
-              padding: 20px;
+              background-color: #007bff; 
+              color: #ffffff; 
+              padding: 15px 30px; 
               text-decoration: none;
-              border-radius: 5px;
+              border-radius: 4px; 
               text-align: center;
               margin-top: 20px;
+              font-weight: bold; 
+              font-size: 16px; 
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+              transition: background-color 0.3s ease; 
+              }
+
+            .button:hover {
+                background-color: #0056b3; 
             }
           `}
         </style>
@@ -100,7 +108,7 @@ export const EmailTemplate = ({ firstName, email, products, amount }) => {
       <Body>
         <Container className="container">
           <Section className="header">
-            <h1>Order Receipt</h1>
+            <h1>UrbanKicks</h1>
             <p>Thank you for your purchase, {firstName}!</p>
           </Section>
           <Section>
@@ -154,8 +162,8 @@ export const EmailTemplate = ({ firstName, email, products, amount }) => {
             </Text>
           </Section>
           <Section className="footer">
-            <Text>Thank You For Shopping From E-Commerce.</Text>
-            <Button href="http://localhost:3000" className="button">
+            <Text>Thank You For Shopping From UrbanKicks.</Text>
+            <Button href="https://e-commerce-jo.vercel.app" className="button">
               Continue Shopping
             </Button>
             <Text>If you have any questions, feel free to contact us.</Text>

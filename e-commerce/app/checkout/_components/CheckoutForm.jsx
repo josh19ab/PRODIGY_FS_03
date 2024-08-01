@@ -111,12 +111,17 @@ function CheckoutForm({ amount }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="px-4 md:px-20 lg:px-40 mt-12 mx-auto max-w-screen-lg">
+      <div className="px-10 md:px-40 lg:px-60 mt-12 mx-auto max-w-screen-lg">
         <div className="w-full ">
           <PaymentElement />
         </div>
-        <button className="bg-darkPrimary p-2 text-white w-full rounded-md mt-6 hover:bg-darkAccent">
-          Submit
+        <button
+          className={`bg-darkPrimary p-2 text-white w-full rounded-md mt-6 hover:bg-darkAccent ${
+            loading ? "cursor-not-allowed" : ""
+          }`}
+          disabled={loading}
+        >
+          {loading ? "Processing..." : "Submit"}
         </button>
       </div>
     </form>

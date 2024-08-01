@@ -17,7 +17,7 @@ function explore() {
   const [outfitList, setOutfitList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sortOption, setSortOption] = useState("titleASC");
-  const [filterCategory, setFilterCategory] = useState("");   
+  const [filterCategory, setFilterCategory] = useState("");
   const [filteredList, setFilteredList] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedAvailability, setSelectedAvailability] = useState([]);
@@ -85,16 +85,16 @@ function explore() {
   const handleCategoryChange = (category) => {
     setSelectedCategories((prev) => {
       if (prev.includes(category)) {
-        return prev.filter((cat) => cat !== category); 
+        return prev.filter((cat) => cat !== category);
       } else {
-        return [...prev, category]; 
+        return [...prev, category];
       }
     });
   };
 
   useEffect(() => {
     if (selectedCategories.length === 0) {
-      setFilteredList(productList); 
+      setFilteredList(productList);
     } else {
       const updatedList = productList.filter((item) =>
         selectedCategories.includes(item.attributes.category)
@@ -106,9 +106,9 @@ function explore() {
   const handleAvailabilityChange = (availability) => {
     setSelectedAvailability((prev) => {
       if (prev.includes(availability)) {
-        return prev.filter((a) => a !== availability); 
+        return prev.filter((a) => a !== availability);
       } else {
-        return [...prev, availability]; 
+        return [...prev, availability];
       }
     });
   };
@@ -147,6 +147,7 @@ function explore() {
     setFilteredList(updatedList);
   };
 
+  
   return (
     <section className=" bg-gray-50">
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -157,14 +158,13 @@ function explore() {
           </h2>
 
           <p className="mt-4 max-w-md text-gray-500">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
-            praesentium cumque iure dicta incidunt est ipsam, officia dolor
-            fugit natus?
+            Discover the ultimate blend of comfort and style with our exclusive
+            range of sneakers and fashion-forward outfits.
           </p>
         </header>
 
         <div className="mt-8 block lg:hidden">
-          <button className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
+          <button id="filterButton" className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
             <span className="text-sm font-medium"> Filters & Sorting </span>
 
             <svg
@@ -184,6 +184,7 @@ function explore() {
           </button>
         </div>
 
+        
         <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8">
           <div className="hidden space-y-4 lg:block">
             <div className="py-2">
@@ -206,7 +207,6 @@ function explore() {
                 <option value="titleDESC">z - a</option>
                 <option value="priceASC">low to high</option>
                 <option value="priceDESC">high to low</option>
-                
               </select>
             </div>
 

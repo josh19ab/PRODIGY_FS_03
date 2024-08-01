@@ -6,15 +6,12 @@ function Hero() {
       <div className="mx-auto max-w-screen-xl px-4 py-24 lg:flex">
         <div className="mx-auto max-w-xl text-center">
           <h1 className="text-3xl font-extrabold sm:text-5xl text-gray-900 ">
-            E-Commerce website &nbsp;
-            <strong className="font-extrabold text-primary sm:block">
-              For a local store.
-            </strong>
+          Urban <strong className="font-extrabold text-primary ">Kicks</strong>
           </h1>
 
           <p className="mt-4 sm:text-xl text-gray-700">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
-            illo tenetur fuga ducimus numquam ea!
+          Elevate Your Look with Our Curated Collection! <br/>
+          Kickstart Your Day with Our Fresh Local Picks
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">

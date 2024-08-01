@@ -81,7 +81,7 @@ function ProductSection() {
         {/* Outfits */}
         <div className="flex items-center justify-between">
           <h2 className="font-bold my-3 text-[20px] text-gray-900 ">
-            Outfits
+            T Shirts
           </h2>
           <a className="flex cursor-pointer" href="/explore">
             <h2 className="text-[14px] text-primary dark:text-blue-300">See Collection</h2>

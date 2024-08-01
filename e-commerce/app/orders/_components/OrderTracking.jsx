@@ -58,7 +58,7 @@ const OrderTracking = () => {
             <div className="mt-10">
               <div className="overflow-hidden rounded-lg shadow">
                 <table className="w-full divide-y-2 divide-gray-200 bg-gray-50 text-sm">
-                  <thead className="ltr:text-left rtl:text-right">
+                  <thead className="ltr:text-left rtl:text-right hidden md:table-header-group">
                     <tr>
                       <th className="whitespace-nowrap px-2 py-2 font-medium text-gray-900 text-left w-1/4">
                         Order ID

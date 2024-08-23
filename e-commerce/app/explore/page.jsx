@@ -9,6 +9,7 @@ import ProductList from "../_components/ProductList";
 import GlobalApi from "../_utils/GlobalApi";
 import ProductItem from "../_components/ProductItem";
 import LoadingEffect from "../_components/LoadingEffect";
+import Sidenav from "./_components/Sidenav";
 
 function explore() {
   const path = usePathname();
@@ -23,6 +24,11 @@ function explore() {
   const [selectedAvailability, setSelectedAvailability] = useState([]);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [isSidenavOpen, setSidenavOpen] = useState(false);
+
+  const toggleSidenav = () => {
+    setSidenavOpen(!isSidenavOpen);
+  };
 
   useEffect(() => {
     getLatestProducts_();
@@ -147,7 +153,6 @@ function explore() {
     setFilteredList(updatedList);
   };
 
-  
   return (
     <section className=" bg-gray-50">
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -164,7 +169,11 @@ function explore() {
         </header>
 
         <div className="mt-8 block lg:hidden">
-          <button id="filterButton" className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
+          <button
+            id="filterButton"
+            className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600"
+            onClick={toggleSidenav}
+          >
             <span className="text-sm font-medium"> Filters & Sorting </span>
 
             <svg
@@ -184,7 +193,27 @@ function explore() {
           </button>
         </div>
 
-        
+        <Sidenav
+          isOpen={isSidenavOpen}
+          onClose={toggleSidenav}
+          setSortOption={setSortOption}
+          setFilterCategory={setFilterCategory}
+          setSelectedCategories={setSelectedCategories}
+          selectedCategories={selectedCategories}
+          handleCategoryChange={handleCategoryChange}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          handlePriceFilter={handlePriceFilter}
+          selectedAvailability={selectedAvailability}
+          setSelectedAvailability={setSelectedAvailability}
+          setMinPrice={setMinPrice}
+          setMaxPrice={setMaxPrice}
+          handleAvailabilityChange={handleAvailabilityChange}
+          setFilteredList={setFilteredList}
+          productList={productList}
+
+        />
+
         <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8">
           <div className="hidden space-y-4 lg:block">
             <div className="py-2">

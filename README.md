@@ -1,6 +1,4 @@
-# PRODIGY_FS_03
-
-Urbankicks
+**Urbankicks**
 
 Urbankicks is an e-commerce platform designed for a local store in your area, enabling customers to browse and purchase products online. With a focus on sneakers and outfits, Urbankicks provides a seamless shopping experience with various features to enhance user engagement and satisfaction.
 
